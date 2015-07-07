@@ -1,0 +1,24 @@
+<% if user_signed_in? %>
+  <%= form_for([@article, @article.comments.build]) do |f| %>
+
+    <fieldset>
+
+        <legend>Write comment</legend>
+
+        <label>Comment</label>
+        <%= f.text_area :body, :style=>"height:200px;" %>
+        <p>
+            <%= recaptcha_tags %>
+        </p>
+        <p>
+            <%= f.submit :class=>"small button" %>
+        </p>
+    </fieldset>
+    <p>
+        Markdown help is available <a href="https://help.github.com/articles/markdown-basics/">here</a>.
+    </p>
+  <% end %>
+<% else  %>
+  <h3>Only registered users are allowed to post comments</h3>
+<% end %>
+

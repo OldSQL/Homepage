@@ -1,0 +1,116 @@
+<%#
+# Copyright 2015 Unicode4all
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License. 
+%>
+
+<!doctype html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<html class="no-js" lang="en" data-useragent="Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)">
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title><%= @page_title %> | Unicode4all</title>
+        <meta name="description" content="Personal homepage (Hello, Web 1.0!)"/>
+        <meta name="author" content="Unicode4all"/>
+        <meta name="copyright" content="Copyright (c) 2015 Unicode4all"/>
+        <script src='https://www.google.com/recaptcha/api.js'></script>
+        <%= stylesheet_link_tag "foundation.min" %>
+        <%= stylesheet_link_tag "style" %>
+        <%= stylesheet_link_tag "font-awesome" %>
+        <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>    
+        <%= javascript_include_tag 'vendor/modernizr' %>
+        <%= csrf_meta_tags %>
+    </head>
+    <body>
+
+        <link href="http://fonts.googleapis.com/css?family=Raleway:600,400,200" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet" type="text/css">
+        <div class="row">
+            <div class="small-12 medium-4 large-6 columns namelogo">
+                <a href="<%= root_url(:only_path => false) %>"><h1>Unicode For All/すべてのためのユニコード</h1></a>
+            </div>
+            <div class="small-12 medium-8 large-6 columns">
+                <div class="nav-bar">
+                    <ul class="button-group">
+                        <li><a href="#" class="button">About</a></li>
+                        <li><a href="<%= articles_url %>" class="button">Blog</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <% if notice %>
+          <div class="alert-box success">
+              <%= notice %>
+              <a href="" class="close">&times;</a>
+          </div>
+        <% end %>
+        <% if alert %>
+          <div class="alert-box alert">
+              <%= alert %>
+              <a href="" class="close">&times;</a>
+          </div>
+        <% end %>
+        <noscript>
+        <div class="alert-box alert">
+            This site requires JavaScript for full functionality.
+            <a href="" class="close">&times;</a>
+        </div>
+        </noscript>
+        <div class="row">
+            <% if user_signed_in? %>
+
+              <span>Hi, <%= current_user.name %>!</span>
+              <%= link_to 'Logout', destroy_user_session_path, :method => :delete %>&nbsp;
+              <%= link_to 'Profile', user_root_path %>
+            <% else %>
+              Hi, Anonymous! Please <%= link_to 'login', new_user_session_path %>
+              or
+              <%= link_to 'register', new_user_registration_path %>
+            <% end %>
+        </div>
+        <div class="row">
+            <%= yield %>
+        </div>
+        <div class="row contact">
+            <hr>
+            <div class="large-12 columns">
+                <h4>Contact Me</h4>
+                <div class="large-2 columns">
+                    <strong>Email/Jabber</strong>: <a href="mailto:celestia@unicode4all.org">celestia@unicode4all.org</a>
+                </div>
+            </div>
+        </div>
+        <footer class="row">
+            <div class="large-12 columns">
+                <div class="row">
+                    <div class="large-6 columns">
+                        <p>© Copyright 2015 Unicode4all.</p>
+                    </div>
+                    <div class="large-6 columns">
+                        <ul class="inline-list right">
+                            <li><a href="/privacy">Privacy</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!--<script src="/assets/vendor/jquery.js"></script>-->
+        <%= javascript_include_tag 'foundation.min' %>
+        <%= javascript_include_tag 'foundation/foundation' %>
+        <%= javascript_include_tag 'foundation/foundation.clearing' %>
+        <script>
+          $(document).foundation();
+        </script>
+    </body>
+</html>

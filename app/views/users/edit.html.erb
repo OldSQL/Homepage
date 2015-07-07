@@ -1,0 +1,35 @@
+<%#
+# Copyright 2015 Unicode4all
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License. 
+%>
+<% if can? :manage, User == false %>
+  <% @user = @current_user %>
+<%  end %>
+<h3><%= @user == @current_user ? "Your Account Settings" : "Edit User" %></h3>
+
+<%= form_for(@user, :html => { :method => :put }) do |f| %>
+  <%= render :partial => 'user_fields', :locals => { :f => f } %>
+
+  <p><%= f.label :password %> <i>(leave blank if you don't want to change it)</i></p>
+  <p><%= f.password_field :password %></p>
+
+  <p><%= f.label :password_confirmation %></p>
+  <p><%= f.password_field :password_confirmation %></p>
+
+  <p><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i></p>
+  <p><%= f.password_field :current_password %></p>
+
+  <p><%= f.submit "Update", class: "small button" %></p>
+<% end %>
+<%= link_to "Back", :back %>

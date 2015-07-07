@@ -1,0 +1,15 @@
+<div class="comment">
+<p>
+    <%= link_to comment.commenter, user_root_path(user: comment.commenter) %> on <%= comment.created_at.strftime("%d %B %Y") %>
+</p>
+<hr>
+<p>
+  <%=raw markdown(comment.body) %>
+</p>
+
+<p>
+  <%= link_to 'Delete Comment', [comment.article, comment],
+               method: :delete,
+               data: { confirm: 'Are you sure?' } %>
+</p>
+</div>
